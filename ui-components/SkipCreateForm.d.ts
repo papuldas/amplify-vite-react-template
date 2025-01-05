@@ -20,12 +20,14 @@ export declare type SkipCreateFormInputValues = {
     location?: string;
     volume?: string;
     size?: string;
+    price?: string;
 };
 export declare type SkipCreateFormValidationValues = {
     name?: ValidationFunction<string>;
     location?: ValidationFunction<string>;
     volume?: ValidationFunction<string>;
     size?: ValidationFunction<string>;
+    price?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SkipCreateFormOverridesProps = {
@@ -34,6 +36,7 @@ export declare type SkipCreateFormOverridesProps = {
     location?: PrimitiveOverrideProps<TextFieldProps>;
     volume?: PrimitiveOverrideProps<TextFieldProps>;
     size?: PrimitiveOverrideProps<TextFieldProps>;
+    price?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type SkipCreateFormProps = React.PropsWithChildren<{
     overrides?: SkipCreateFormOverridesProps | undefined | null;

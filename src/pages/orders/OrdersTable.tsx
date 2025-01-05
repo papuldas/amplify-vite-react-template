@@ -10,7 +10,7 @@ import type { Schema } from "../../../amplify/data/resource";
 const client = generateClient<Schema>();
 import type { ColDef } from "ag-grid-community";
 
-function BasicTable() {
+function OrdersTable() {
   const navigate = useNavigate();
   const [skips, setSkips] = useState<Array<Schema["Skip"]["type"]>>([]);
    const [columnDefs] = useState<ColDef[]>([
@@ -61,4 +61,4 @@ function BasicTable() {
   );
 }
 
-export default BasicTable;
+export default OrdersTable;

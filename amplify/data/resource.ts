@@ -19,11 +19,21 @@ const schema = a.schema({
       price: a.string()
     }).authorization(allow => [allow.authenticated()]),
 
+   Status: a.enum(['Collected', 'Ready', 'Not Ready', 'No Response', 'Cancelled']),
+
+   ClientInfo: a.customType({
+      postCode: a.string(),
+      address: a.string(),
+      nameOrCompany: a.string(),
+      phone: a.string()
+   }),
+
   Order: a.model({
-        name: a.string(),
-        date: a.string(),
-        status: a.string(),
-        skip: a.string()
+    name: a.string(),
+    date: a.string(),
+    status: a.ref('Status'),
+    skip: a.string(),
+    clientInfo: a.ref('ClientInfo')
   }).authorization(allow => [allow.authenticated()])
 });
 

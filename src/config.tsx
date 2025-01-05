@@ -63,7 +63,7 @@ export const appNavs = [
     eventKey: "forms",
     icon: <Icon as={MdAdUnits} />,
     title: "Order Management",
-    to: "/forms",
+    to: "/orders",
     /**children: [
         {
           icon: <Icon as={MdOutlineTableChart} />,

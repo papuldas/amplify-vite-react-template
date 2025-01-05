@@ -23,6 +23,7 @@ export const getSkip = /* GraphQL */ `
       id
       location
       name
+      price
       size
       updatedAt
       volume
@@ -75,6 +76,7 @@ export const listSkips = /* GraphQL */ `
         id
         location
         name
+        price
         size
         updatedAt
         volume

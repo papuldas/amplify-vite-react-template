@@ -24,11 +24,13 @@ export default function SkipUpdateForm(props) {
     location: "",
     volume: "",
     size: "",
+    price: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [location, setLocation] = React.useState(initialValues.location);
   const [volume, setVolume] = React.useState(initialValues.volume);
   const [size, setSize] = React.useState(initialValues.size);
+  const [price, setPrice] = React.useState(initialValues.price);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = skipRecord
@@ -38,6 +40,7 @@ export default function SkipUpdateForm(props) {
     setLocation(cleanValues.location);
     setVolume(cleanValues.volume);
     setSize(cleanValues.size);
+    setPrice(cleanValues.price);
     setErrors({});
   };
   const [skipRecord, setSkipRecord] = React.useState(skipModelProp);
@@ -61,6 +64,7 @@ export default function SkipUpdateForm(props) {
     location: [],
     volume: [],
     size: [],
+    price: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -92,6 +96,7 @@ export default function SkipUpdateForm(props) {
           location: location ?? null,
           volume: volume ?? null,
           size: size ?? null,
+          price: price ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -156,6 +161,7 @@ export default function SkipUpdateForm(props) {
               location,
               volume,
               size,
+              price,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -183,6 +189,7 @@ export default function SkipUpdateForm(props) {
               location: value,
               volume,
               size,
+              price,
             };
             const result = onChange(modelFields);
             value = result?.location ?? value;
@@ -210,6 +217,7 @@ export default function SkipUpdateForm(props) {
               location,
               volume: value,
               size,
+              price,
             };
             const result = onChange(modelFields);
             value = result?.volume ?? value;
@@ -237,6 +245,7 @@ export default function SkipUpdateForm(props) {
               location,
               volume,
               size: value,
+              price,
             };
             const result = onChange(modelFields);
             value = result?.size ?? value;
@@ -250,6 +259,34 @@ export default function SkipUpdateForm(props) {
         errorMessage={errors.size?.errorMessage}
         hasError={errors.size?.hasError}
         {...getOverrideProps(overrides, "size")}
+      ></TextField>
+      <TextField
+        label="Price"
+        isRequired={false}
+        isReadOnly={false}
+        value={price}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              location,
+              volume,
+              size,
+              price: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.price ?? value;
+          }
+          if (errors.price?.hasError) {
+            runValidationTasks("price", value);
+          }
+          setPrice(value);
+        }}
+        onBlur={() => runValidationTasks("price", price)}
+        errorMessage={errors.price?.errorMessage}
+        hasError={errors.price?.hasError}
+        {...getOverrideProps(overrides, "price")}
       ></TextField>
       <Flex
         justifyContent="space-between"

@@ -22,17 +22,20 @@ export default function SkipCreateForm(props) {
     location: "",
     volume: "",
     size: "",
+    price: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [location, setLocation] = React.useState(initialValues.location);
   const [volume, setVolume] = React.useState(initialValues.volume);
   const [size, setSize] = React.useState(initialValues.size);
+  const [price, setPrice] = React.useState(initialValues.price);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
     setLocation(initialValues.location);
     setVolume(initialValues.volume);
     setSize(initialValues.size);
+    setPrice(initialValues.price);
     setErrors({});
   };
   const validations = {
@@ -40,6 +43,7 @@ export default function SkipCreateForm(props) {
     location: [],
     volume: [],
     size: [],
+    price: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -71,6 +75,7 @@ export default function SkipCreateForm(props) {
           location,
           volume,
           size,
+          price,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -137,6 +142,7 @@ export default function SkipCreateForm(props) {
               location,
               volume,
               size,
+              price,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -164,6 +170,7 @@ export default function SkipCreateForm(props) {
               location: value,
               volume,
               size,
+              price,
             };
             const result = onChange(modelFields);
             value = result?.location ?? value;
@@ -191,6 +198,7 @@ export default function SkipCreateForm(props) {
               location,
               volume: value,
               size,
+              price,
             };
             const result = onChange(modelFields);
             value = result?.volume ?? value;
@@ -218,6 +226,7 @@ export default function SkipCreateForm(props) {
               location,
               volume,
               size: value,
+              price,
             };
             const result = onChange(modelFields);
             value = result?.size ?? value;
@@ -231,6 +240,34 @@ export default function SkipCreateForm(props) {
         errorMessage={errors.size?.errorMessage}
         hasError={errors.size?.hasError}
         {...getOverrideProps(overrides, "size")}
+      ></TextField>
+      <TextField
+        label="Price"
+        isRequired={false}
+        isReadOnly={false}
+        value={price}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              location,
+              volume,
+              size,
+              price: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.price ?? value;
+          }
+          if (errors.price?.hasError) {
+            runValidationTasks("price", value);
+          }
+          setPrice(value);
+        }}
+        onBlur={() => runValidationTasks("price", price)}
+        errorMessage={errors.price?.errorMessage}
+        hasError={errors.price?.hasError}
+        {...getOverrideProps(overrides, "price")}
       ></TextField>
       <Flex
         justifyContent="space-between"
