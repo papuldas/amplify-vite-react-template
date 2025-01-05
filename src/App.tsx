@@ -10,6 +10,7 @@ import Dashboard from "./pages/dashboard";
 import Profile from "./pages/profile";
 import Tables from "./pages/tables";
 import Orders from "./pages/orders";
+import OrderForms from "./pages/orders/forms";
 import UsersTable from "./pages/tables/UsersTablePage";
 import Forms from "./pages/forms";
 import EditForm from "./pages/forms/EditForm";
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="edit-form" element={<EditForm />} />
             <Route path="tables" element={<Tables />} />
             <Route path="orders" element={<Orders />} />
+            <Route path="order" element={<OrderForms />} />
             <Route path="users-table" element={<UsersTable />} />
             <Route path="profile" element={<Profile />} />
 

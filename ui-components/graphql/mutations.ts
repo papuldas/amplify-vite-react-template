@@ -8,6 +8,13 @@ export const createOrder = /* GraphQL */ `
     $input: CreateOrderInput!
   ) {
     createOrder(condition: $condition, input: $input) {
+      clientInfo {
+        address
+        nameOrCompany
+        phone
+        postCode
+        __typename
+      }
       createdAt
       date
       id
@@ -57,6 +64,13 @@ export const deleteOrder = /* GraphQL */ `
     $input: DeleteOrderInput!
   ) {
     deleteOrder(condition: $condition, input: $input) {
+      clientInfo {
+        address
+        nameOrCompany
+        phone
+        postCode
+        __typename
+      }
       createdAt
       date
       id
@@ -106,6 +120,13 @@ export const updateOrder = /* GraphQL */ `
     $input: UpdateOrderInput!
   ) {
     updateOrder(condition: $condition, input: $input) {
+      clientInfo {
+        address
+        nameOrCompany
+        phone
+        postCode
+        __typename
+      }
       createdAt
       date
       id

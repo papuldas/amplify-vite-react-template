@@ -5,6 +5,13 @@
 export const getOrder = /* GraphQL */ `
   query GetOrder($id: ID!) {
     getOrder(id: $id) {
+      clientInfo {
+        address
+        nameOrCompany
+        phone
+        postCode
+        __typename
+      }
       createdAt
       date
       id

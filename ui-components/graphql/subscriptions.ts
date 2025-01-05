@@ -5,6 +5,13 @@
 export const onCreateOrder = /* GraphQL */ `
   subscription OnCreateOrder($filter: ModelSubscriptionOrderFilterInput) {
     onCreateOrder(filter: $filter) {
+      clientInfo {
+        address
+        nameOrCompany
+        phone
+        postCode
+        __typename
+      }
       createdAt
       date
       id
@@ -45,6 +52,13 @@ export const onCreateTodo = /* GraphQL */ `
 export const onDeleteOrder = /* GraphQL */ `
   subscription OnDeleteOrder($filter: ModelSubscriptionOrderFilterInput) {
     onDeleteOrder(filter: $filter) {
+      clientInfo {
+        address
+        nameOrCompany
+        phone
+        postCode
+        __typename
+      }
       createdAt
       date
       id
@@ -85,6 +99,13 @@ export const onDeleteTodo = /* GraphQL */ `
 export const onUpdateOrder = /* GraphQL */ `
   subscription OnUpdateOrder($filter: ModelSubscriptionOrderFilterInput) {
     onUpdateOrder(filter: $filter) {
+      clientInfo {
+        address
+        nameOrCompany
+        phone
+        postCode
+        __typename
+      }
       createdAt
       date
       id

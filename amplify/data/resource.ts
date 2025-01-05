@@ -19,7 +19,7 @@ const schema = a.schema({
       price: a.string()
     }).authorization(allow => [allow.authenticated()]),
 
-   Status: a.enum(['Collected', 'Ready', 'Not Ready', 'No Response', 'Cancelled']),
+   Status: a.enum(['Collected', 'Ready',  'Cancelled']),
 
    ClientInfo: a.customType({
       postCode: a.string(),

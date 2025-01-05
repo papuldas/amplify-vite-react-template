@@ -8,7 +8,7 @@ const Orders = () => {
  const navigate = useNavigate();
 
   const openForm = () => {
-    navigate("/forms");
+    navigate("/order");
   };
   return (
     <>
