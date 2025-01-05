@@ -1,84 +1,52 @@
-import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { useAuthenticator } from '@aws-amplify/ui-react';
-import { generateClient } from "aws-amplify/data";
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import "@aws-amplify/ui-react/styles.css";
+import "./App.css";
+import { ThemeProvider } from "@aws-amplify/ui-react";
+import theme from "./theme";
 
-import Dashboard from './components/Dashboard';
-import SkipManagement from './components/SkipManagement';
-import OrderManagement from './components/OrderManagement';
-import AuditTrail from './components/AuditTrail';
-import WeighbridgeManagement from './components/WeighbridgeManagement';
-const client = generateClient<Schema>();
+import Layout from "./components/Layout";
+import Dashboard from "./pages/dashboard";
+import Profile from "./pages/profile";
+import Tables from "./pages/tables";
+import UsersTable from "./pages/tables/UsersTablePage";
+import Forms from "./pages/forms";
+import EditForm from "./pages/forms/EditForm";
 
-function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-  const { user, signOut } = useAuthenticator();
-
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
-
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
-
+export default function App() {
   return (
-  /*
-   <main>
-        <h1>{user?.signInDetails?.loginId}'s todos</h1>
-        <button onClick={createTodo}>+ new</button>
-        <ul>
-          {todos.map((todo) => (
-            <li onClick={() => deleteTodo(todo.id)}
-            key={todo.id}>{todo.content}</li>
-          ))}
-        </ul>
-        <div>
-          🥳 App successfully hosted. Try creating a new todo.
-          <br />
-          <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-            Review next step of this tutorial.
-          </a>
-        </div>
-        <button onClick={signOut}>Sign out</button>
-      </main>*/
+    <ThemeProvider theme={theme}>
+      <div>
+        {/* Routes nest inside one another. Nested route paths build upon
+            parent route paths, and nested route elements render inside
+            parent route elements. See the note about <Outlet> below. */}
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="forms" element={<Forms />} />
+            <Route path="edit-form" element={<EditForm />} />
+            <Route path="tables" element={<Tables />} />
+            <Route path="users-table" element={<UsersTable />} />
+            <Route path="profile" element={<Profile />} />
 
-          <Router>
-                  <div style={{ display: 'flex', height: '100vh' }}>
-                    {/* Sidebar */}
-                    <div style={{ width: '20%',  padding: '20px' }}>
-                      <h3>Management App</h3>
-                      <nav>
-                        <ul style={{ listStyle: 'none', padding: 0 }}>
-                          <li><Link to="/">Dashboard</Link></li>
-                          <li><Link to="/skip-management">Skip Management</Link></li>
-                          <li><Link to="/order-management">Order Management</Link></li>
-                          <li><Link to="/audit-trail">Audit Trail</Link></li>
-                          <li><Link to="/weighbridge-management">Weighbridge Management</Link></li>
-                        </ul>
-                      </nav>
-                    </div>
-
-                    {/* Content Area */}
-                    <div style={{ flex: 1, padding: '20px' }}>
-                      <Routes>
-                        <Route path="/" element={<Dashboard />} />
-                        <Route path="/skip-management" element={<SkipManagement />} />
-                        <Route path="/order-management" element={<OrderManagement />} />
-                        <Route path="/audit-trail" element={<AuditTrail />} />
-                        <Route path="/weighbridge-management" element={<WeighbridgeManagement />} />
-                      </Routes>
-                    </div>
-                  </div>
-                </Router>
+          {/* Using path="*"" means "match anything", so this route
+                acts like a catch-all for URLs that we don't have explicit
+                routes for. */}
+            <Route path="*" element={<NoMatch />} />
+          </Route>
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 
-export default App;
+function NoMatch() {
+  return (
+    <div>
+      <h2>Nothing to see here!</h2>
+      <p>
+        <Link to="/">Go to the home page</Link>
+      </p>
+    </div>
+  );
+}
