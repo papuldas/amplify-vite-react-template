@@ -1,59 +1,64 @@
-import {
-  Table,
-  TableCell,
-  TableBody,
-  TableHead,
-  TableRow,
-  Button,
-} from "@aws-amplify/ui-react";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AgGridReact } from "ag-grid-react";
+import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
 import { generateClient } from "aws-amplify/data";
-const client = generateClient<Schema>();
 import { MdModeEditOutline } from "react-icons/md";
+import type { Schema } from "../../../amplify/data/resource";
+const client = generateClient<Schema>();
+import type { ColDef } from "ag-grid-community";
 
 function BasicTable() {
   const navigate = useNavigate();
   const [skips, setSkips] = useState<Array<Schema["Skip"]["type"]>>([]);
+   const [columnDefs] = useState<ColDef[]>([
+      { headerName: "Name", field: "name", filter: true, sortable: true, sort: "asc", sortIndex: 0 },
+      { headerName: "Location", field: "location", filter: true, sortable: true },
+      { headerName: "Volume", field: "volume", filter: true, sortable: true },
+      { headerName: "Size", field: "size", filter: true, sortable: true },
+      {
+        headerName: "Actions",
+        field: "id",
+        cellRenderer: (params) => (
+          <button style={{ height: "40px", margin: "4px 4px" }} onClick={() => navigate(`/forms/${params.value}`)}>
+            <MdModeEditOutline />
+          </button>
+        ),
+      },
+    ]);
 
-   useEffect(() => {
-      client.models.Skip.observeQuery().subscribe({
-        next: (data) => setSkips([...data.items]),
-      });
-    }, []);
 
+  useEffect(() => {
+    client.models.Skip.observeQuery().subscribe({
+      next: (data) => setSkips([...data.items]),
+    });
+  }, []);
+
+    const onGridReady = (params) => {
+      params.api.sizeColumnsToFit();
+      gridApi = params.api;
+    };
+
+  let gridApi;
+  const exportToExcel = () => {
+    gridApi.exportDataAsExcel();
+  };
   return (
-    <>
-      <Table caption="" highlightOnHover={false}>
-        <TableHead>
-          <TableRow>
-            <TableCell as="th">Name</TableCell>
-            <TableCell as="th">Location</TableCell>
-            <TableCell as="th">Volume</TableCell>
-            <TableCell as="th">Size</TableCell>
-            <TableCell as="th"></TableCell>
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {skips?.map((item) => {
-            return (
-              <TableRow key={item.id}>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.location}</TableCell>
-                <TableCell>{item.volume}</TableCell>
-                <TableCell>{item.size}</TableCell>
-                <TableCell>
-                  <Button onClick={() => navigate(`/forms/${item.id}`)}><MdModeEditOutline /></Button>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </>
+   <div>
+    <div className="ag-theme-alpine" style={{ height: 500, width: "100%" }}>
+      <AgGridReact
+        rowData={skips}
+        columnDefs={columnDefs}
+        modules={[ClientSideRowModelModule]}
+        rowHeight={50} // Adjust the row height as needed
+        onGridReady={onGridReady}
+        pagination={true}
+      />
+    </div>
+      </div>
   );
-};
+}
 
 export default BasicTable;

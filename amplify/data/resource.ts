@@ -16,7 +16,7 @@ const schema = a.schema({
       location: a.string(),
       volume: a.string(),
       size: a.string(),
-       owner: a.string()
+      price: a.string()
     }).authorization(allow => [allow.authenticated()]),
 
   Order: a.model({

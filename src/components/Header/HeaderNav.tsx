@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AiFillGithub } from "react-icons/ai";
 import { baseConfig } from "../../config";
 import { useAuthenticator } from '@aws-amplify/ui-react';
-
+import { FaUserCircle } from "react-icons/fa";
 const HeaderNav = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuthenticator();
@@ -30,12 +30,13 @@ const HeaderNav = () => {
         trigger={
           <MenuButton variation="menu">
             <div className="header-avatar">
-              <img alt="avatar" src={"https://i.pravatar.cc/150?img=3"}></img>
+              <FaUserCircle size={24} />
+
             </div>
           </MenuButton>
         }
       >
-        <MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
+      {/*  <MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>*/}
         <MenuItem>Settings</MenuItem>
         <MenuItem onClick={() => signOut()}>Logout</MenuItem>
       </Menu>
