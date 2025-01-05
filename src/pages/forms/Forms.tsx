@@ -1,6 +1,6 @@
-import React from "react";
+
 import { View, Heading } from "@aws-amplify/ui-react";
-import BasicForm from "./BasicForm";
+//import BasicForm from "./BasicForm";
 import { SkipCreateForm } from '../../../ui-components';
 const Forms = () => {
   return (
