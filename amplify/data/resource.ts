@@ -8,8 +8,15 @@ specifies that any user authenticated via an API key can "create", "read",
 =========================================================================*/
 const schema = a.schema({
   Todo: a.model({
-    content: a.string(),
-  }).authorization(allow => [allow.owner()]),
+    content: a.string()
+  }).authorization(allow => [allow.authenticated()]),
+
+  Skip: a.model({
+      volume: a.string(),
+      location: a.string(),
+      size: a.string(),
+      name: a.string()
+    }).authorization(allow => [allow.authenticated()])
 });
 
 export type Schema = ClientSchema<typeof schema>;
