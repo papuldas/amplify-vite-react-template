@@ -1,13 +1,13 @@
 
 import { View, Heading } from "@aws-amplify/ui-react";
-//import BasicForm from "./BasicForm";
-import { SkipCreateForm } from '../../../ui-components';
+import { useParams } from "react-router-dom";
+import { SkipCreateForm,SkipUpdateForm } from '../../../ui-components';
 const Forms = () => {
+  const { id } = useParams();
+
   return (
     <>
-      <div>
-        <h2>Forms</h2>
-      </div>
+
       <View
         backgroundColor="var(--amplify-colors-white)"
         borderRadius="6px"
@@ -15,9 +15,9 @@ const Forms = () => {
         padding="1rem"
         minHeight="100vh"
       >
-        <Heading color="#333"> Basic Form </Heading>
+        <Heading color="#333"> Skip Form </Heading>
         <br></br>
-        <SkipCreateForm />
+         {id ? <SkipUpdateForm id={id} /> : <SkipCreateForm />}
       </View>
     </>
   );

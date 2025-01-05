@@ -2,6 +2,20 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getOrder = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      createdAt
+      date
+      id
+      name
+      skip
+      status
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const getSkip = /* GraphQL */ `
   query GetSkip($id: ID!) {
     getSkip(id: $id) {
@@ -9,7 +23,6 @@ export const getSkip = /* GraphQL */ `
       id
       location
       name
-      owner
       size
       updatedAt
       volume
@@ -23,8 +36,29 @@ export const getTodo = /* GraphQL */ `
       content
       createdAt
       id
-      owner
       updatedAt
+      __typename
+    }
+  }
+`;
+export const listOrders = /* GraphQL */ `
+  query ListOrders(
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        createdAt
+        date
+        id
+        name
+        skip
+        status
+        updatedAt
+        __typename
+      }
+      nextToken
       __typename
     }
   }
@@ -41,7 +75,6 @@ export const listSkips = /* GraphQL */ `
         id
         location
         name
-        owner
         size
         updatedAt
         volume
@@ -63,7 +96,6 @@ export const listTodos = /* GraphQL */ `
         content
         createdAt
         id
-        owner
         updatedAt
         __typename
       }

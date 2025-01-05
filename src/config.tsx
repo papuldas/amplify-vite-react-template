@@ -6,23 +6,28 @@ import {
   MdModeEditOutline,
   MdAccountBox,
   MdOutlineTableChart,
+  MdAcUnit,
+  MdAdUnits,
+  MdAccountBalance
 } from "react-icons/md";
+
+import {
+  GiNuclearWaste
+} from "react-icons/gi";
 
 export const baseConfig = {
   projectLink: "/", // GitHub link in the navbar
   docsRepositoryBase: "", // base URL for the docs repository
   titleSuffix: "",
-  search: true,
+  search: false,
   header: true,
   headerText: "KC Recycling Skip Management",
   footer: true,
   footerText: (
     <>
       <span>
-        © {new Date().getFullYear()}, Made with ❤️ by {""}
-            <a href="https://github.com/mrtzdev" target="_blank" rel="noreferrer">
-          Mrtzdev
-        </a>
+        © {new Date().getFullYear()},Honey Trading Ltd. All rights reserved.
+
       </span>
     </>
   ),
@@ -50,31 +55,24 @@ export const appNavs = [
 
   {
     eventKey: "tables",
-    icon: <Icon as={MdOutlineTableChart} />,
-    title: "Tables",
-    to: "/tables",
-    children: [
-      {
-        eventKey: "basic-table",
-        title: "Basic Table",
-        to: "/tables",
-      },
-      {
-        eventKey: "users",
-        title: "Users Table",
-        to: "/users-table",
-      },
-    ],
+    icon: <Icon as={MdAcUnit } />,
+    title: "Skip Management",
+    to: "/tables"
   },
   {
     eventKey: "forms",
-    icon: <Icon as={MdModeEditOutline} />,
-    title: "Forms",
+    icon: <Icon as={MdAdUnits} />,
+    title: "Order Management",
     to: "/forms",
-    children: [
-      {
+    /**children: [
+        {
+          icon: <Icon as={MdOutlineTableChart} />,
+          eventKey: "basic-table",
+          title: "My Orders",
+          to: "/tables",
+        },{
         eventKey: "form-basic",
-        title: "Basic",
+        title: "Add Order",
         to: "/forms",
       },
       {
@@ -82,12 +80,18 @@ export const appNavs = [
         title: "Edit Form",
         to: "/edit-form",
       },
-    ],
+    ], */
   },
+   {
+      eventKey: "tables",
+      icon: <Icon as={MdAccountBalance  } />,
+      title: "Weighbridge Management",
+      to: "/tables"
+    },
   {
     eventKey: "profile",
     icon: <Icon as={MdAccountBox} />,
-    title: "Profile",
+    title: "Audit Trail",
     to: "/profile",
   },
 ];

@@ -11,7 +11,7 @@ const HeaderNav = () => {
 
  return (
     <>
-      {baseConfig.projectLink ? (
+    {/* {baseConfig.projectLink ? (
         <div className="github-link">
           <Link
             href={baseConfig.projectLink}
@@ -24,7 +24,7 @@ const HeaderNav = () => {
       ) : (
         <></>
       )}
-
+*/}
       <Menu
         menuAlign="end"
         trigger={

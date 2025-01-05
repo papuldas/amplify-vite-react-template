@@ -2,17 +2,27 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateOrder = /* GraphQL */ `
+  subscription OnCreateOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onCreateOrder(filter: $filter) {
+      createdAt
+      date
+      id
+      name
+      skip
+      status
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const onCreateSkip = /* GraphQL */ `
-  subscription OnCreateSkip(
-    $filter: ModelSubscriptionSkipFilterInput
-    $owner: String
-  ) {
-    onCreateSkip(filter: $filter, owner: $owner) {
+  subscription OnCreateSkip($filter: ModelSubscriptionSkipFilterInput) {
+    onCreateSkip(filter: $filter) {
       createdAt
       id
       location
       name
-      owner
       size
       updatedAt
       volume
@@ -21,31 +31,37 @@ export const onCreateSkip = /* GraphQL */ `
   }
 `;
 export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo(
-    $filter: ModelSubscriptionTodoFilterInput
-    $owner: String
-  ) {
-    onCreateTodo(filter: $filter, owner: $owner) {
+  subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
+    onCreateTodo(filter: $filter) {
       content
       createdAt
       id
-      owner
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteOrder = /* GraphQL */ `
+  subscription OnDeleteOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onDeleteOrder(filter: $filter) {
+      createdAt
+      date
+      id
+      name
+      skip
+      status
       updatedAt
       __typename
     }
   }
 `;
 export const onDeleteSkip = /* GraphQL */ `
-  subscription OnDeleteSkip(
-    $filter: ModelSubscriptionSkipFilterInput
-    $owner: String
-  ) {
-    onDeleteSkip(filter: $filter, owner: $owner) {
+  subscription OnDeleteSkip($filter: ModelSubscriptionSkipFilterInput) {
+    onDeleteSkip(filter: $filter) {
       createdAt
       id
       location
       name
-      owner
       size
       updatedAt
       volume
@@ -54,31 +70,37 @@ export const onDeleteSkip = /* GraphQL */ `
   }
 `;
 export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo(
-    $filter: ModelSubscriptionTodoFilterInput
-    $owner: String
-  ) {
-    onDeleteTodo(filter: $filter, owner: $owner) {
+  subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
+    onDeleteTodo(filter: $filter) {
       content
       createdAt
       id
-      owner
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateOrder = /* GraphQL */ `
+  subscription OnUpdateOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onUpdateOrder(filter: $filter) {
+      createdAt
+      date
+      id
+      name
+      skip
+      status
       updatedAt
       __typename
     }
   }
 `;
 export const onUpdateSkip = /* GraphQL */ `
-  subscription OnUpdateSkip(
-    $filter: ModelSubscriptionSkipFilterInput
-    $owner: String
-  ) {
-    onUpdateSkip(filter: $filter, owner: $owner) {
+  subscription OnUpdateSkip($filter: ModelSubscriptionSkipFilterInput) {
+    onUpdateSkip(filter: $filter) {
       createdAt
       id
       location
       name
-      owner
       size
       updatedAt
       volume
@@ -87,15 +109,11 @@ export const onUpdateSkip = /* GraphQL */ `
   }
 `;
 export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo(
-    $filter: ModelSubscriptionTodoFilterInput
-    $owner: String
-  ) {
-    onUpdateTodo(filter: $filter, owner: $owner) {
+  subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
+    onUpdateTodo(filter: $filter) {
       content
       createdAt
       id
-      owner
       updatedAt
       __typename
     }

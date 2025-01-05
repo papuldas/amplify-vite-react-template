@@ -7,35 +7,45 @@ import {
   Button,
 } from "@aws-amplify/ui-react";
 
-import { mockSongsData } from "../../data/mock";
-
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { generateClient } from "aws-amplify/data";
+const client = generateClient<Schema>();
+import { MdModeEditOutline } from "react-icons/md";
 
-const data = mockSongsData(10);
-
-const BasicTable = () => {
+function BasicTable() {
   const navigate = useNavigate();
+  const [skips, setSkips] = useState<Array<Schema["Skip"]["type"]>>([]);
+
+   useEffect(() => {
+      client.models.Skip.observeQuery().subscribe({
+        next: (data) => setSkips([...data.items]),
+      });
+    }, []);
+
   return (
     <>
       <Table caption="" highlightOnHover={false}>
         <TableHead>
           <TableRow>
-            <TableCell as="th">Title</TableCell>
-            <TableCell as="th">Description</TableCell>
-            <TableCell as="th">Category</TableCell>
+            <TableCell as="th">Name</TableCell>
+            <TableCell as="th">Location</TableCell>
+            <TableCell as="th">Volume</TableCell>
+            <TableCell as="th">Size</TableCell>
             <TableCell as="th"></TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
-          {data?.map((item) => {
+          {skips?.map((item) => {
             return (
-              <TableRow key={item._id}>
+              <TableRow key={item.id}>
                 <TableCell>{item.name}</TableCell>
-                <TableCell>{item.description}</TableCell>
-                <TableCell>{item.genre}</TableCell>
+                <TableCell>{item.location}</TableCell>
+                <TableCell>{item.volume}</TableCell>
+                <TableCell>{item.size}</TableCell>
                 <TableCell>
-                  <Button onClick={() => navigate("/edit-form")}>Edit</Button>
+                  <Button onClick={() => navigate(`/forms/${item.id}`)}><MdModeEditOutline /></Button>
                 </TableCell>
               </TableRow>
             );

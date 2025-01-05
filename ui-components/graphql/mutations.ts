@@ -2,6 +2,23 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createOrder = /* GraphQL */ `
+  mutation CreateOrder(
+    $condition: ModelOrderConditionInput
+    $input: CreateOrderInput!
+  ) {
+    createOrder(condition: $condition, input: $input) {
+      createdAt
+      date
+      id
+      name
+      skip
+      status
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const createSkip = /* GraphQL */ `
   mutation CreateSkip(
     $condition: ModelSkipConditionInput
@@ -12,7 +29,6 @@ export const createSkip = /* GraphQL */ `
       id
       location
       name
-      owner
       size
       updatedAt
       volume
@@ -29,7 +45,23 @@ export const createTodo = /* GraphQL */ `
       content
       createdAt
       id
-      owner
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteOrder = /* GraphQL */ `
+  mutation DeleteOrder(
+    $condition: ModelOrderConditionInput
+    $input: DeleteOrderInput!
+  ) {
+    deleteOrder(condition: $condition, input: $input) {
+      createdAt
+      date
+      id
+      name
+      skip
+      status
       updatedAt
       __typename
     }
@@ -45,7 +77,6 @@ export const deleteSkip = /* GraphQL */ `
       id
       location
       name
-      owner
       size
       updatedAt
       volume
@@ -62,7 +93,23 @@ export const deleteTodo = /* GraphQL */ `
       content
       createdAt
       id
-      owner
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateOrder = /* GraphQL */ `
+  mutation UpdateOrder(
+    $condition: ModelOrderConditionInput
+    $input: UpdateOrderInput!
+  ) {
+    updateOrder(condition: $condition, input: $input) {
+      createdAt
+      date
+      id
+      name
+      skip
+      status
       updatedAt
       __typename
     }
@@ -78,7 +125,6 @@ export const updateSkip = /* GraphQL */ `
       id
       location
       name
-      owner
       size
       updatedAt
       volume
@@ -95,7 +141,6 @@ export const updateTodo = /* GraphQL */ `
       content
       createdAt
       id
-      owner
       updatedAt
       __typename
     }

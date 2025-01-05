@@ -12,11 +12,19 @@ const schema = a.schema({
   }).authorization(allow => [allow.authenticated()]),
 
   Skip: a.model({
-      volume: a.string(),
+      name: a.string(),
       location: a.string(),
+      volume: a.string(),
       size: a.string(),
-      name: a.string()
-    }).authorization(allow => [allow.authenticated()])
+       owner: a.string()
+    }).authorization(allow => [allow.authenticated()]),
+
+  Order: a.model({
+        name: a.string(),
+        date: a.string(),
+        status: a.string(),
+        skip: a.string()
+  }).authorization(allow => [allow.authenticated()])
 });
 
 export type Schema = ClientSchema<typeof schema>;

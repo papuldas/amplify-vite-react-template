@@ -24,6 +24,7 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="forms" element={<Forms />} />
+            <Route path="forms/:id" element={<Forms />} />
             <Route path="edit-form" element={<EditForm />} />
             <Route path="tables" element={<Tables />} />
             <Route path="users-table" element={<UsersTable />} />

@@ -1,16 +1,24 @@
 
-import { View, Heading, ScrollView } from "@aws-amplify/ui-react";
+import { View, Heading, ScrollView,Button } from "@aws-amplify/ui-react";
 import BasicTable from "./BasicTable";
 //import UsersTable from "./UsersTable";
+import { useNavigate } from "react-router-dom";
 
 // const demoUsers = [{ name: "hello" }, { name: "hello" }];
 
 const Tables = () => {
+ const navigate = useNavigate();
+
+  const openForm = () => {
+    navigate("/forms");
+  };
   return (
     <>
-      <div>
-        <h2>Tables</h2>
-      </div>
+       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <h2>Skip Management</h2>
+              <Button className="amplify-button--primary" onClick={openForm}>Add Skip</Button>
+       </div>
+
 
       <View
         backgroundColor="var(--amplify-colors-white)"
@@ -19,8 +27,6 @@ const Tables = () => {
         padding="1rem"
         minHeight="80vh"
       >
-        <Heading color="#333"> Basic Table </Heading>
-        <br></br>
         <ScrollView width="100%">
           <BasicTable />
         </ScrollView>

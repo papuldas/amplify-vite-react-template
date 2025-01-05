@@ -17,24 +17,24 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type SkipUpdateFormInputValues = {
-    volume?: string;
-    location?: string;
-    size?: string;
     name?: string;
+    location?: string;
+    volume?: string;
+    size?: string;
 };
 export declare type SkipUpdateFormValidationValues = {
-    volume?: ValidationFunction<string>;
-    location?: ValidationFunction<string>;
-    size?: ValidationFunction<string>;
     name?: ValidationFunction<string>;
+    location?: ValidationFunction<string>;
+    volume?: ValidationFunction<string>;
+    size?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SkipUpdateFormOverridesProps = {
     SkipUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    volume?: PrimitiveOverrideProps<TextFieldProps>;
-    location?: PrimitiveOverrideProps<TextFieldProps>;
-    size?: PrimitiveOverrideProps<TextFieldProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
+    location?: PrimitiveOverrideProps<TextFieldProps>;
+    volume?: PrimitiveOverrideProps<TextFieldProps>;
+    size?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type SkipUpdateFormProps = React.PropsWithChildren<{
     overrides?: SkipUpdateFormOverridesProps | undefined | null;

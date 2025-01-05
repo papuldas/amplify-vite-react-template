@@ -18,28 +18,28 @@ export default function SkipCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    volume: "",
-    location: "",
-    size: "",
     name: "",
+    location: "",
+    volume: "",
+    size: "",
   };
-  const [volume, setVolume] = React.useState(initialValues.volume);
-  const [location, setLocation] = React.useState(initialValues.location);
-  const [size, setSize] = React.useState(initialValues.size);
   const [name, setName] = React.useState(initialValues.name);
+  const [location, setLocation] = React.useState(initialValues.location);
+  const [volume, setVolume] = React.useState(initialValues.volume);
+  const [size, setSize] = React.useState(initialValues.size);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setVolume(initialValues.volume);
-    setLocation(initialValues.location);
-    setSize(initialValues.size);
     setName(initialValues.name);
+    setLocation(initialValues.location);
+    setVolume(initialValues.volume);
+    setSize(initialValues.size);
     setErrors({});
   };
   const validations = {
-    volume: [],
-    location: [],
-    size: [],
     name: [],
+    location: [],
+    volume: [],
+    size: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -67,10 +67,10 @@ export default function SkipCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          volume,
-          location,
-          size,
           name,
+          location,
+          volume,
+          size,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -125,31 +125,31 @@ export default function SkipCreateForm(props) {
       {...rest}
     >
       <TextField
-        label="Volume"
+        label="Name"
         isRequired={false}
         isReadOnly={false}
-        value={volume}
+        value={name}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              volume: value,
+              name: value,
               location,
+              volume,
               size,
-              name,
             };
             const result = onChange(modelFields);
-            value = result?.volume ?? value;
+            value = result?.name ?? value;
           }
-          if (errors.volume?.hasError) {
-            runValidationTasks("volume", value);
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
           }
-          setVolume(value);
+          setName(value);
         }}
-        onBlur={() => runValidationTasks("volume", volume)}
-        errorMessage={errors.volume?.errorMessage}
-        hasError={errors.volume?.hasError}
-        {...getOverrideProps(overrides, "volume")}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
         label="Location"
@@ -160,10 +160,10 @@ export default function SkipCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              volume,
-              location: value,
-              size,
               name,
+              location: value,
+              volume,
+              size,
             };
             const result = onChange(modelFields);
             value = result?.location ?? value;
@@ -179,6 +179,33 @@ export default function SkipCreateForm(props) {
         {...getOverrideProps(overrides, "location")}
       ></TextField>
       <TextField
+        label="Volume"
+        isRequired={false}
+        isReadOnly={false}
+        value={volume}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              location,
+              volume: value,
+              size,
+            };
+            const result = onChange(modelFields);
+            value = result?.volume ?? value;
+          }
+          if (errors.volume?.hasError) {
+            runValidationTasks("volume", value);
+          }
+          setVolume(value);
+        }}
+        onBlur={() => runValidationTasks("volume", volume)}
+        errorMessage={errors.volume?.errorMessage}
+        hasError={errors.volume?.hasError}
+        {...getOverrideProps(overrides, "volume")}
+      ></TextField>
+      <TextField
         label="Size"
         isRequired={false}
         isReadOnly={false}
@@ -187,10 +214,10 @@ export default function SkipCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              volume,
-              location,
-              size: value,
               name,
+              location,
+              volume,
+              size: value,
             };
             const result = onChange(modelFields);
             value = result?.size ?? value;
@@ -204,33 +231,6 @@ export default function SkipCreateForm(props) {
         errorMessage={errors.size?.errorMessage}
         hasError={errors.size?.hasError}
         {...getOverrideProps(overrides, "size")}
-      ></TextField>
-      <TextField
-        label="Name"
-        isRequired={false}
-        isReadOnly={false}
-        value={name}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              volume,
-              location,
-              size,
-              name: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.name ?? value;
-          }
-          if (errors.name?.hasError) {
-            runValidationTasks("name", value);
-          }
-          setName(value);
-        }}
-        onBlur={() => runValidationTasks("name", name)}
-        errorMessage={errors.name?.errorMessage}
-        hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <Flex
         justifyContent="space-between"
